@@ -19,23 +19,25 @@ const style = {
     'h-full flex-1 w-full dark:bg-nft-black-2 bg-white px-4 rounded-md dark:text-white text-nft-black-1 font-normal text-xs minlg:text-lg outline-none',
 };
 
-const FooterLinks = ({ heading, items }) => (
-  <div className="flex-1 justify-start items-start">
-    <h3 className="font-poppins dark:text-white text-nft-black-1 font-semibold text-base mb-5">
-      {heading}
-    </h3>
-    {items.map((item, index) => (
-      <p
-        key={index}
-        className="font-poppins dark:text-white text-nft-black-1 font-normal text-xs cursor-pointer dark:hover:text-nft-gray-1 hover:text-nft-black-1 my-3"
-      >
-        {item}
-      </p>
-    ))}
-  </div>
-);
+function FooterLinks({ heading, items }) {
+  return (
+    <div className="flex-1 justify-start items-start">
+      <h3 className="font-poppins dark:text-white text-nft-black-1 font-semibold text-base mb-5">
+        {heading}
+      </h3>
+      {items.map((item, index) => (
+        <p
+          key={index}
+          className="font-poppins dark:text-white text-nft-black-1 font-normal text-xs cursor-pointer dark:hover:text-nft-gray-1 hover:text-nft-black-1 my-3"
+        >
+          {item}
+        </p>
+      ))}
+    </div>
+  );
+}
 
-const Footer = () => {
+function Footer() {
   const { theme } = useTheme();
 
   return (
@@ -109,6 +111,6 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
+}
 
 export default Footer;

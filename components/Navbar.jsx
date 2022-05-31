@@ -23,7 +23,7 @@ const style = {
   mobileToggleContainer: 'hidden md:flex ml-2',
 };
 
-const MenuItems = ({ isMobile, active, setActive }) => {
+function MenuItems({ isMobile, active, setActive }) {
   const generateLink = (index) => {
     switch (index) {
       case 0:
@@ -60,9 +60,9 @@ const MenuItems = ({ isMobile, active, setActive }) => {
       ))}
     </ul>
   );
-};
+}
 
-const ButtonGroup = ({ setActive, router }) => {
+function ButtonGroup({ setActive, router }) {
   const hasConnected = true;
   return hasConnected ? (
     <Button
@@ -80,9 +80,9 @@ const ButtonGroup = ({ setActive, router }) => {
       handleClick={() => {}}
     />
   );
-};
+}
 
-const Navbar = () => {
+function Navbar() {
   const { theme, setTheme } = useTheme();
   const [active, setActive] = useState('Explore NFTs');
   const router = useRouter();
@@ -171,6 +171,6 @@ const Navbar = () => {
       </div>
     </nav>
   );
-};
+}
 
 export default Navbar;

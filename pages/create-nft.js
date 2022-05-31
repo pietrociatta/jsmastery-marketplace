@@ -8,7 +8,7 @@ import images from '../assets';
 import Button from '../components/Button';
 import Input from '../components/Input';
 
-const CreateNFT = () => {
+function CreateNFT() {
   const [fileUrl, setFileUrl] = useState(null);
   const { theme } = useTheme();
 
@@ -119,5 +119,5 @@ const CreateNFT = () => {
       </div>
     </div>
   );
-};
+}
 export default CreateNFT;
