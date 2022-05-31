@@ -12,7 +12,9 @@ const MyApp = ({ Component, pageProps }) => (
   <ThemeProvider attribute="class">
     <div className={style.container}>
       <Navbar />
-      <Component {...pageProps} />
+      <div className="pt-65">
+        <Component {...pageProps} />
+      </div>
       <Footer />
     </div>
     <Script
