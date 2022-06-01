@@ -7,10 +7,13 @@ import { useTheme } from 'next-themes';
 import images from '../assets';
 import Button from '../components/Button';
 import Input from '../components/Input';
+import { NFTContext } from '../context/NFTContext';
 
 function CreateNFT() {
   const [fileUrl, setFileUrl] = useState(null);
   const { theme } = useTheme();
+  const { uploadToIPFS, createNFT } = useContext(NFTContext);
+  const router = useRouter();
 
   const [formInput, setformInput] = useState({
     price: '',
@@ -18,11 +21,11 @@ function CreateNFT() {
     description: '',
   });
 
-  const onDrop = useCallback(() => {
-    // upload to ipfs
+  const onDrop = useCallback(async (acceptedFile) => {
+    const url = await uploadToIPFS(acceptedFile[0]);
+    console.log(url);
+    setFileUrl(url);
   }, []);
-
-  console.log(formInput);
 
   const {
     getRootProps,
@@ -113,7 +116,9 @@ function CreateNFT() {
           <Button
             btnName="Create NFT"
             classStyles="rounded-xl"
-            onClick={() => {}}
+            handleClick={() => {
+              createNFT(formInput, fileUrl, router);
+            }}
           />
         </div>
       </div>

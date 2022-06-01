@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
 import Banner from '../components/Banner';
@@ -6,6 +6,7 @@ import CreatorCard from '../components/CreatorCard';
 import images from '../assets';
 import { makeId } from '../utils/makeId';
 import NftCard from '../components/NftCard';
+import { NFTContext } from '../context/NFTContext';
 
 const style = {
   container: 'flex justify-center sm:px-4 p-12',
@@ -17,6 +18,8 @@ const Home = () => {
   const { theme } = useTheme();
   const parentRef = useRef(null);
   const scrollRef = useRef(null);
+  const { fetchNFTs } = useContext(NFTContext);
+  const [nfts, setnfts] = useState([]);
 
   const handleScroll = (direction) => {
     const { current } = scrollRef;
@@ -38,6 +41,14 @@ const Home = () => {
       setHideButtons(false);
     } else setHideButtons(true);
   };
+
+  useEffect(() => {
+    fetchNFTs().then((items) => {
+      setnfts(items);
+      console.log(nfts);
+      console.log('rendered');
+    });
+  }, []);
 
   useEffect(() => {
     isScrollable();
@@ -111,7 +122,11 @@ const Home = () => {
             <div>SearchBar</div>
           </div>
           <div className="mt-3 w-full grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 minmd:grid-cols-5 minlg:grid-cols-5">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((index) => (
+            {nfts.map((nft) => (
+              <NftCard key={nft.tokenId} nft={nft} />
+            ))}
+
+            {/* {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((index) => (
               <NftCard
                 key={`nft-${index}`}
                 nft={{
@@ -123,7 +138,7 @@ const Home = () => {
                   description: 'Cool NFT on Sale',
                 }}
               />
-            ))}
+            ))} */}
           </div>
         </div>
       </div>
