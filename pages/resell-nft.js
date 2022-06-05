@@ -8,10 +8,14 @@ import images from '../assets';
 import { shortenAddress } from '../utils/shortenAddress';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import { marketAddressAbi, marketAddress } from '../context/constants';
+import Web3Modal from 'web3modal';
+import { ethers } from 'ethers';
+
 const ResellNFT = () => {
   const { createSale, isLoadingNFT } = useContext(NFTContext);
   const router = useRouter();
-  const { tokenURI, id } = router.query;
+  const { tokenURI, tokenId } = router.query;
   const [price, setPrice] = useState('');
   const [image, setimage] = useState('');
 
@@ -25,10 +29,10 @@ const ResellNFT = () => {
 
   useEffect(() => {
     fetchNFT();
-  }, [id]);
+  }, [tokenId]);
 
   const resell = async () => {
-    await createSale(tokenURI, price, true, id);
+    await createSale(tokenURI, price, true, tokenId);
 
     router.push('/');
   };

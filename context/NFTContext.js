@@ -82,6 +82,7 @@ export const NFTProvider = ({ children }) => {
     const price = ethers.utils.parseUnits(formInputPrice, 'ether');
     console.log(formInputPrice);
     console.log(price);
+    console.log(id);
     const contract = fetchContract(signer);
     const listingPrice = await contract.getListingPrice();
     const transaction = !isReselling
